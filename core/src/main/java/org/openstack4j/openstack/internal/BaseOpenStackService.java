@@ -4,6 +4,7 @@ import static org.openstack4j.core.transport.ClientConstants.HEADER_USER_AGENT;
 import static org.openstack4j.core.transport.ClientConstants.USER_AGENT;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class BaseOpenStackService {
     ServiceType serviceType = ServiceType.IDENTITY;
     Function<String, String> endpointFunc;
     
-    private static ThreadLocal<String> reqIdContainer = new ThreadLocal<String>();
+    private static ThreadLocal<String> reqIdContainer = new ThreadLocal<>();
     
     public String getXOpenstackRequestId() {
     	return reqIdContainer.get();
@@ -94,8 +95,9 @@ public class BaseOpenStackService {
     }
 
     protected String uri(String path, Object... params) {
-        if (params.length == 0)
+        if (params.length == 0) {
             return path;
+        }
         return String.format(path, params);
     }
 
@@ -114,9 +116,9 @@ public class BaseOpenStackService {
                 .method(method).path(path);
         Map headers = ses.getHeaders();
         if (headers != null && headers.size() > 0){
-            return new Invocation<R>(req, serviceType, endpointFunc).headers(headers);
+            return new Invocation<>(req, serviceType, endpointFunc).headers(headers);
         }else{ 
-            return new Invocation<R>(req, serviceType, endpointFunc);
+            return new Invocation<>(req, serviceType, endpointFunc);
         }
     }
 
@@ -145,23 +147,35 @@ public class BaseOpenStackService {
 
         public Invocation<R> params(Map<String, ? extends Object> params) {
             if (params != null) {
-                for (String name : params.keySet())
+                for (String name : params.keySet()) {
                     req.queryParam(name, params.get(name));
+                    Object obj = params.get(name);
+                    if (Collection.class.isAssignableFrom(obj.getClass())) {
+                        for (String value : (Collection<String>) obj) {
+                            req.queryParam(name, value);
+                        }
+                    } else {
+                        req.queryParam(name, obj);
+                    }
+                }
             }
             return this;
         }
 
         public Invocation<R> param(boolean condition, String name, Object value) {
-            if (condition)
+            if (condition) {
                 req.queryParam(name, value);
+            }
             return this;
         }
 
         public Invocation<R> paramLists(Map<String, ? extends Iterable<? extends Object>> params) {
             if (params != null) {
-                for (Map.Entry<String, ? extends Iterable<? extends Object>> pair : params.entrySet())
-                    for (Object value : pair.getValue())
+                for (Map.Entry<String, ? extends Iterable<? extends Object>> pair : params.entrySet()) {
+                    for (Object value : pair.getValue()) {
                         req.queryParam(pair.getKey(), value);
+                    }
+                }
             }
             return this;
         }
@@ -193,8 +207,9 @@ public class BaseOpenStackService {
         }
 
         public Invocation<R> headers(Map<String, ? extends Object> headers) {
-            if (headers != null)
+            if (headers != null) {
                 req.headers(headers);
+            }
             return this;
         }
 
@@ -269,8 +284,9 @@ public class BaseOpenStackService {
     }
 
     protected <T> List<T> toList(T[] arr) {
-        if (arr == null)
+        if (arr == null) {
             return Collections.emptyList();
+        }
         return Arrays.asList(arr);
     }
 

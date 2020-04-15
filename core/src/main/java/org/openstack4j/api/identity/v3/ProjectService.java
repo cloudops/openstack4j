@@ -3,8 +3,8 @@ package org.openstack4j.api.identity.v3;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.identity.v3.Project;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.identity.v3.Project;
 
 /**
  * Identity Project Service
@@ -78,5 +78,13 @@ public interface ProjectService extends RestService {
 	 * @return list of projects
 	 */
 	List<? extends Project> list();
+
+	/**
+	 * List all projects in domain
+	 *
+	 * @param domainId
+	 * @return
+	 */
+	List<? extends Project> list(String domainId);
 
 }

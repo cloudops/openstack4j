@@ -150,16 +150,25 @@ public class UserServiceImpl extends BaseIdentityServices implements UserService
         checkNotNull(domainId);
         return get(Roles.class, uri("domains/%s/users/%s/roles", domainId, userId)).execute().getList();
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public ActionResponse changePassword(String userId,String originalPassword,String password) {
+    public List<? extends User> list(String domainId) {
+        checkNotNull(domainId);
+        return get(Users.class, uri(PATH_USERS)).param("domain_id", domainId).execute().getList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse changePassword(String userId, String originalPassword, String password) {
         checkNotNull(userId);
         checkNotNull(originalPassword);
         checkNotNull(password);
-        Map<String,Object> passwordMap = new HashMap<String,Object>();
+        Map<String, Object> passwordMap = new HashMap<>();
         passwordMap.put("original_password", originalPassword);
         passwordMap.put("password", password);
         MapEntity mapEntity =  MapEntity.create("user", passwordMap);
