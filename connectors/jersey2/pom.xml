@@ -12,10 +12,21 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<jersey-client-version>2.27</jersey-client-version>
+		<jersey-client-version>2.22.1</jersey-client-version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.github.openstack4j.core</groupId>
+			<artifactId>openstack4j-core</artifactId>
+			<version>${parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.openstack4j.core</groupId>
+			<artifactId>openstack4j-core-test</artifactId>
+			<version>${parent.version}</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-client</artifactId>
