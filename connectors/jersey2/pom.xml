@@ -18,11 +18,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.github.openstack4j.core</groupId>
-			<artifactId>openstack4j-core</artifactId>
-			<version>${parent.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.openstack4j.core</groupId>
 			<artifactId>openstack4j-core-test</artifactId>
 			<version>${parent.version}</version>
 			<scope>test</scope>
