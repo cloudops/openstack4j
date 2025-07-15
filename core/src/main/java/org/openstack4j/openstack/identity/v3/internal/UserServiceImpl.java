@@ -19,6 +19,8 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneUser.Users;
 import static org.openstack4j.core.transport.ClientConstants.PATH_DOMAINS;
 import static org.openstack4j.core.transport.ClientConstants.PATH_USERS;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * implementation of v3 user service
  */
@@ -124,6 +126,15 @@ public class UserServiceImpl extends BaseIdentityServices implements UserService
     @Override
     public List<? extends User> list() {
         return get(Users.class, uri(PATH_USERS)).execute().getList();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<? extends User> list(String domainId) {
+        checkNotNull(domainId);
+        return get(Users.class, uri(PATH_USERS)).param("domain_id", domainId).execute().getList();
     }
 
     /**

@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.openstack4j.core</groupId>
     <artifactId>openstack4j-parent</artifactId>
-    <version>3.13-SNAPSHOT</version>
+    <version>3.12</version>
     <name>OpenStack4j Parent</name>
     <description>OpenStack Java API</description>
     <url>https://github.com/openstack4j/openstack4j/</url>
@@ -278,14 +278,16 @@
     </dependencyManagement>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>release</id>
+            <name>Releases CloudOps Repository</name>
+            <url>https://us-maven.pkg.dev/cloudmc-saas-shared/libs-release-internal</url>
         </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Snapshots CloudOps Repository</name>
+            <url>https://us-maven.pkg.dev/cloudmc-saas-shared/libs-snapshot-internal</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <profiles>
