@@ -125,6 +125,15 @@ public class UserServiceImpl extends BaseIdentityServices implements UserService
     public List<? extends User> list() {
         return get(Users.class, uri(PATH_USERS)).execute().getList();
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<? extends User> list(String domainId) {
+        checkNotNull(domainId);
+        return get(Users.class, uri(PATH_USERS)).param("domain_id", domainId).execute().getList();
+    }
 
     /**
      * {@inheritDoc}

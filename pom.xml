@@ -278,14 +278,16 @@
     </dependencyManagement>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>release</id>
+            <name>Releases CloudOps Repository</name>
+            <url>https://us-maven.pkg.dev/cloudmc-saas-shared/libs-release-internal</url>
         </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Snapshots CloudOps Repository</name>
+            <url>https://us-maven.pkg.dev/cloudmc-saas-shared/libs-snapshot-internal</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <profiles>

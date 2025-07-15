@@ -17,6 +17,7 @@ import org.openstack4j.model.common.header.Range;
 public class DownloadOptions {
 
     List<HeaderNameValue> headers = new ArrayList<>();
+    Map<String, String> queryParams = new HashMap<>();
 
     private DownloadOptions() {
     }
@@ -68,10 +69,29 @@ public class DownloadOptions {
         return this;
     }
 
+
+    public DownloadOptions queryParam(String key, String value) {
+        if (value == null) {
+            return this;
+        }
+        if (key == null) {
+            return this;
+        }
+        queryParams.put(key, value);
+        return this;
+    }
+
     /**
      * @return all headers configured from this options object
      */
     public List<HeaderNameValue> getHeaders() {
         return headers;
+    }
+
+    /**
+     * @return all query parameters configured from this options object
+     */
+    public Map<String, String> getQueryParams() {
+        return queryParams;
     }
 }
