@@ -6,7 +6,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>openstack4j-jersey2</artifactId>
-	<version>co-3.6.2</version>
+	<version>co-3.6.3</version>
 	<name>OpenStack4j Jersey2 Connector</name>
 	<url>http://github.com/openstack4j/openstack4j/</url>
 	<packaging>jar</packaging>
