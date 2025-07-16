@@ -19,6 +19,8 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneUser.Users;
 import static org.openstack4j.core.transport.ClientConstants.PATH_DOMAINS;
 import static org.openstack4j.core.transport.ClientConstants.PATH_USERS;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * implementation of v3 user service
  */

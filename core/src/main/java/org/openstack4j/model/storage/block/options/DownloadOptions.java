@@ -2,6 +2,8 @@ package org.openstack4j.model.storage.block.options;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import org.openstack4j.model.common.functions.RangesToHeaderNameValue;
 import org.openstack4j.model.common.header.HeaderNameValue;
