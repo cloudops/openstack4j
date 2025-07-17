@@ -6,7 +6,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>openstack4j-core</artifactId>
-    <version>co-3.6.3</version>
+    <version>co-3.11.1</version>
     <name>OpenStack4j Core</name>
     <description>OpenStack Java API</description>
     <url>https://github.com/openstack4j/openstack4j/</url>
