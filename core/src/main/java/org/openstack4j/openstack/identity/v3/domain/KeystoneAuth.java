@@ -51,6 +51,7 @@ public class KeystoneAuth implements Authentication, AuthStore {
     public KeystoneAuth(String user, String password, Identifier domain, AuthScope scope) {
         this.identity = AuthIdentity.createCredentialType(user, password, domain);
         this.scope = scope;
+        this.type = Type.CREDENTIALS;
     }
 
     public KeystoneAuth(AuthScope scope, Type type) {
@@ -62,6 +63,7 @@ public class KeystoneAuth implements Authentication, AuthStore {
         this.type = type;
     }
 
+    @JsonIgnore
     public Type getType() {
         return type;
     }
