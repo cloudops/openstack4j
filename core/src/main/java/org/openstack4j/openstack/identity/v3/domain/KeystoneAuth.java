@@ -51,7 +51,6 @@ public class KeystoneAuth implements Authentication, AuthStore {
     public KeystoneAuth(String user, String password, Identifier domain, AuthScope scope) {
         this.identity = AuthIdentity.createCredentialType(user, password, domain);
         this.scope = scope;
-        this.type = Type.CREDENTIALS;
     }
 
     public KeystoneAuth(AuthScope scope, Type type) {
@@ -200,13 +199,15 @@ public class KeystoneAuth implements Authentication, AuthStore {
                     this.password = password;
                     if (domainIdentifier != null) {
                         domain = new AuthDomain();
-                        if (domainIdentifier.isTypeID())
-                            domain.setId(domainIdentifier.getId());
-                        else
-                            domain.setName(domainIdentifier.getId());
+                        if (domainIdentifier.isTypeID()) {
+                           domain.setId(domainIdentifier.getId());
+                        } else {
+                           domain.setName(domainIdentifier.getId());
+                        }
                         setName(username);
-                    } else
-                        setId(username);
+                    } else {
+                       setId(username);
+                    }
                 }
 
                 @Override
@@ -342,10 +343,11 @@ public class KeystoneAuth implements Authentication, AuthStore {
             private String name;
 
             public AuthDomain(Identifier domain) {
-                if (domain.isTypeID())
-                    this.id = domain.getId();
-                else
-                    this.name = domain.getId();
+                if (domain.isTypeID()) {
+                   this.id = domain.getId();
+                } else {
+                   this.name = domain.getId();
+                }
             }
 
             @Override
