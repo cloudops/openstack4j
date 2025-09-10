@@ -63,6 +63,7 @@ public class KeystoneAuth implements Authentication, AuthStore {
         this.type = type;
     }
 
+    @JsonIgnore
     public Type getType() {
         return type;
     }
@@ -200,13 +201,15 @@ public class KeystoneAuth implements Authentication, AuthStore {
                     this.password = password;
                     if (domainIdentifier != null) {
                         domain = new AuthDomain();
-                        if (domainIdentifier.isTypeID())
-                            domain.setId(domainIdentifier.getId());
-                        else
-                            domain.setName(domainIdentifier.getId());
+                        if (domainIdentifier.isTypeID()) {
+                           domain.setId(domainIdentifier.getId());
+                        } else {
+                           domain.setName(domainIdentifier.getId());
+                        }
                         setName(username);
-                    } else
-                        setId(username);
+                    } else {
+                       setId(username);
+                    }
                 }
 
                 @Override
@@ -342,10 +345,11 @@ public class KeystoneAuth implements Authentication, AuthStore {
             private String name;
 
             public AuthDomain(Identifier domain) {
-                if (domain.isTypeID())
-                    this.id = domain.getId();
-                else
-                    this.name = domain.getId();
+                if (domain.isTypeID()) {
+                   this.id = domain.getId();
+                } else {
+                   this.name = domain.getId();
+                }
             }
 
             @Override
