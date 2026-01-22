@@ -5,8 +5,8 @@
         <artifactId>openstack4j-core-integration-test</artifactId>
         <version>co-3.12.3</version>
     </parent>
-    <artifactId>it-jersey2</artifactId>
-    <name>OpenStack4j IntegrationTest Jersey2 Connector</name>
+    <artifactId>it-jersey2-jakarta</artifactId>
+    <name>OpenStack4j IntegrationTest Jersey2 Jakarta Connector</name>
     <properties>
         <skipTests>false</skipTests>
     </properties>
@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.github.openstack4j.core.connectors</groupId>
-            <artifactId>openstack4j-jersey2</artifactId>
+            <artifactId>openstack4j-jersey2-jakarta</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>

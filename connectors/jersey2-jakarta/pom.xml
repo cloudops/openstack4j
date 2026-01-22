@@ -5,21 +5,35 @@
         <version>co-3.12.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>openstack4j-httpclient</artifactId>
-    <name>OpenStack4j HttpComponents-HttpClient Connector</name>
+    <artifactId>openstack4j-jersey2-jakarta</artifactId>
+    <name>OpenStack4j Jersey2 Jakarta Connector</name>
     <url>https://github.com/openstack4j/openstack4j/</url>
     <packaging>jar</packaging>
 
     <properties>
-        <httpclient-version>4.3.1</httpclient-version>
+        <jersey-version>3.1.10</jersey-version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.3.6</version>
-            <type>jar</type>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>4.0.0</version>
         </dependency>
     </dependencies>
 
@@ -33,10 +47,10 @@
                     <instructions>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Export-Package>
-                            org.openstack4j.connectors.httpclient
+                            org.openstack4j.connectors.jersey2
                         </Export-Package>
                         <Import-Package>
-                            !org.openstack4j.connectors.httpclient,
+                            !org.openstack4j.connectors.jersey2,
                             *
                         </Import-Package>
                         <!--
@@ -57,5 +71,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
