@@ -143,8 +143,9 @@ public class OSAuthenticator {
             access = access.applyContext(info.endpoint, (org.openstack4j.openstack.identity.v2.domain.TokenAuth) auth);
         }
 
-        if (!info.reLinkToExistingSession)
-            return OSClientSession.OSClientSessionV2.createSession(access, info.perspective, info.provider, config);
+        if (!info.reLinkToExistingSession) {
+           return OSClientSessionV2.createSession(access, info.perspective, info.provider, config);
+        }
 
         OSClientSession.OSClientSessionV2 current = (OSClientSessionV2) OSClientSession.getCurrent();
         current.access = access;
@@ -156,24 +157,30 @@ public class OSAuthenticator {
             Map<String, String> headers = new HashMap<>();
             Authentication.Scope.Project project = auth.getScope().getProject();
             if (project != null) {
-                if (!isEmpty(project.getId()))
-                    headers.put(ClientConstants.HEADER_X_PROJECT_ID, project.getId());
-                if (!isEmpty(project.getName()))
-                    headers.put(ClientConstants.HEADER_X_PROJECT_NAME, project.getName());
+                if (!isEmpty(project.getId())) {
+                   headers.put(ClientConstants.HEADER_X_PROJECT_ID, project.getId());
+                }
+                if (!isEmpty(project.getName())) {
+                   headers.put(ClientConstants.HEADER_X_PROJECT_NAME, project.getName());
+                }
                 Authentication.Scope.Domain domain = project.getDomain();
                 if (domain != null) {
-                    if (!isEmpty(domain.getId()))
-                        headers.put(ClientConstants.HEADER_X_PROJECT_DOMAIN_ID, domain.getId());
-                    if (!isEmpty(domain.getName()))
-                        headers.put(ClientConstants.HEADER_X_PROJECT_DOMAIN_NAME, domain.getName());
+                    if (!isEmpty(domain.getId())) {
+                       headers.put(ClientConstants.HEADER_X_PROJECT_DOMAIN_ID, domain.getId());
+                    }
+                    if (!isEmpty(domain.getName())) {
+                       headers.put(ClientConstants.HEADER_X_PROJECT_DOMAIN_NAME, domain.getName());
+                    }
                 }
             } else {
                 Authentication.Scope.Domain domain = auth.getScope().getDomain();
                 if (domain != null) {
-                    if (!isEmpty(domain.getId()))
-                        headers.put(ClientConstants.HEADER_X_DOMAIN_ID, domain.getId());
-                    if (!isEmpty(domain.getName()))
-                        headers.put(ClientConstants.HEADER_X_DOMAIN_NAME, domain.getName());
+                    if (!isEmpty(domain.getId())) {
+                       headers.put(ClientConstants.HEADER_X_DOMAIN_ID, domain.getId());
+                    }
+                    if (!isEmpty(domain.getName())) {
+                       headers.put(ClientConstants.HEADER_X_DOMAIN_NAME, domain.getName());
+                    }
                 }
             }
             KeystoneToken keystoneToken = new KeystoneToken();
@@ -230,8 +237,9 @@ public class OSAuthenticator {
     }
 
     private static boolean isEmpty(String str) {
-        if (str != null && str.length() > 0)
-            return false;
+        if (str != null && str.length() > 0) {
+           return false;
+        }
         return true;
     }
 
