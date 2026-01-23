@@ -5,8 +5,8 @@
         <artifactId>openstack4j-core-integration-test</artifactId>
         <version>co-3.12.4</version>
     </parent>
-    <artifactId>it-httpclient</artifactId>
-    <name>OpenStack4j IntegrationTest Apache HttpClient</name>
+    <artifactId>it-jersey2-jakarta</artifactId>
+    <name>OpenStack4j IntegrationTest Jersey2 Jakarta Connector</name>
     <properties>
         <skipTests>false</skipTests>
     </properties>
@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.github.openstack4j.core.connectors</groupId>
-            <artifactId>openstack4j-httpclient</artifactId>
+            <artifactId>openstack4j-jersey2-jakarta</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
@@ -34,7 +34,7 @@
                 <version>2.19</version>
                 <executions>
                     <execution>
-                        <id>it-httpclient</id>
+                        <id>integrationtest</id>
                         <phase>integration-test</phase>
                         <goals>
                             <goal>test</goal>

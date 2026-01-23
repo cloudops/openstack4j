@@ -49,22 +49,26 @@ public final class HttpCommand<R> {
                     new InetSocketAddress(config.getProxy().getRawHost(), config.getProxy().getPort())));
         }
 
-        if (config.getConnectTimeout() > 0)
-            okHttpClientBuilder.connectTimeout(config.getConnectTimeout(), TimeUnit.MILLISECONDS);
+        if (config.getConnectTimeout() > 0) {
+           okHttpClientBuilder.connectTimeout(config.getConnectTimeout(), TimeUnit.MILLISECONDS);
+        }
 
-        if (config.getReadTimeout() > 0)
-            okHttpClientBuilder.readTimeout(config.getReadTimeout(), TimeUnit.MILLISECONDS);
+        if (config.getReadTimeout() > 0) {
+           okHttpClientBuilder.readTimeout(config.getReadTimeout(), TimeUnit.MILLISECONDS);
+        }
 
         if (config.isIgnoreSSLVerification()) {
             okHttpClientBuilder.hostnameVerifier(UntrustedSSL.getHostnameVerifier());
             okHttpClientBuilder.sslSocketFactory(UntrustedSSL.getSSLContext().getSocketFactory(), UntrustedSSL.getTrustManager());
         }
 
-        if (config.getSslContext() != null)
-            okHttpClientBuilder.sslSocketFactory(config.getSslContext().getSocketFactory());
+        if (config.getSslContext() != null) {
+           okHttpClientBuilder.sslSocketFactory(config.getSslContext().getSocketFactory());
+        }
 
-        if (config.getHostNameVerifier() != null)
-            okHttpClientBuilder.hostnameVerifier(config.getHostNameVerifier());
+        if (config.getHostNameVerifier() != null) {
+           okHttpClientBuilder.hostnameVerifier(config.getHostNameVerifier());
+        }
         if (HttpLoggingFilter.isLoggingEnabled()) {
             okHttpClientBuilder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
         }
@@ -148,7 +152,9 @@ public final class HttpCommand<R> {
 
     private void populateHeaders(HttpRequest<R> request) {
 
-        if (!request.hasHeaders()) return;
+        if (!request.hasHeaders()) {
+           return;
+        }
 
         for (Map.Entry<String, Object> h : request.getHeaders().entrySet()) {
             clientReq.addHeader(h.getKey(), String.valueOf(h.getValue()));
