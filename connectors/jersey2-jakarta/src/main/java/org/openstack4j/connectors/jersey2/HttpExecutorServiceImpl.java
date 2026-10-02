@@ -29,12 +29,21 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
      */
     @Override
     public <R> HttpResponse execute(HttpRequest<R> request) {
+        // Jersey discovers providers and initializes its client runtime lazily, using the thread
+        // context classloader. Pin it to this connector's classloader so that, when loaded from an
+        // isolated (child-first) plugin classloader, Jersey and Jackson resolve from the same copy
+        // as the openstack4j model classes, whatever thread makes the call.
+        Thread thread = Thread.currentThread();
+        ClassLoader previous = thread.getContextClassLoader();
+        thread.setContextClassLoader(HttpExecutorServiceImpl.class.getClassLoader());
         try {
             return invoke(request);
         } catch (ResponseException re) {
             throw re;
         } catch (Exception e) {
             throw new ConnectionException("Error during execution: " + e, 0, e);
+        } finally {
+            thread.setContextClassLoader(previous);
         }
     }
 
