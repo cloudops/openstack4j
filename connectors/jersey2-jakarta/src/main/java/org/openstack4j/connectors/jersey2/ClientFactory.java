@@ -22,6 +22,7 @@ import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.client.HttpUrlConnectorProvider;
 import org.glassfish.jersey.client.HttpUrlConnectorProvider.ConnectionFactory;
+import org.glassfish.jersey.client.JerseyClientBuilder;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.openstack4j.api.exceptions.ConnectionException;
 import org.openstack4j.core.transport.ClientConstants;
@@ -66,8 +67,11 @@ class ClientFactory {
         if (config.getProxy() != null) {
             addProxy(clientConfig, config);
         }
-
-        ClientBuilder cb = ClientBuilder.newBuilder()
+        // Instantiate Jersey directly instead of ClientBuilder.newBuilder(): the JAX-RS lookup
+        // goes through the thread context classloader, which, when this connector runs inside an
+        // isolated plugin classloader, can resolve another Jersey/Jackson copy that ignores the
+        // Jackson annotations on our model classes (e.g. KeystoneAuth sent without its "auth" root).
+        ClientBuilder cb = new JerseyClientBuilder()
                 .withConfig(clientConfig)
                 .property(ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION, "true")
                 .register(JacksonFeature.class)
